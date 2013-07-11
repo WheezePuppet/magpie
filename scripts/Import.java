@@ -2,6 +2,10 @@
 import java.sql.*;
 import java.io.*;
 
+/** Import a deck file to the Magpie database. This program currently does
+ * <i>not</i> automatically insert the "reverse" of each card, as might be
+ * desired for modern languages (where you have to translate both ways.)
+ */
 public class Import {
 
     public static void main(String args[]) {
@@ -34,7 +38,6 @@ public class Import {
             FileInputStream(filename),"UTF-8"));
 
         String deckName = br.readLine();
-        br.readLine();   // Skip blank
 
         PreparedStatement ps = c.prepareStatement(
             "INSERT INTO deck (deckname, courseid, active) " +
@@ -52,16 +55,21 @@ public class Import {
 
         String question = br.readLine();
         while (question != null) {
-            br.readLine();   // Skip ","
+            String next = br.readLine();
+            while (!next.equals(",")) {
+                question = question + "\n" + next;
+                next = br.readLine();
+            }
             String answer = br.readLine();
+            next = br.readLine();
+            while (!next.equals(".")) {
+                answer = answer + "\n" + next;
+                next = br.readLine();
+            }
             insertCardStmt.setString(1,question);
             insertCardStmt.setString(2,answer);
             insertCardStmt.setInt(3,did);
             insertCardStmt.executeUpdate();
-
-            br.readLine();   // Skip blank
-            br.readLine();   // Skip "."
-            br.readLine();   // Skip blank
 
             question = br.readLine();
         }

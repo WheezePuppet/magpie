@@ -1,0 +1,7 @@
+<web-app>
+	<servlet>
+		<servlet-name>Loader</servlet-name>
+		<servlet-class>edu.umw.cpsc.magpie.core.Loader</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+</web-app>

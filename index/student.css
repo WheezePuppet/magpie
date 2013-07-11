@@ -1,0 +1,90 @@
+#title {
+	margin-left: auto;
+	margin-right: auto;
+	display: table;
+	text-align: center;
+}
+
+html {
+	height: 100%;
+	min-height: 100%;
+	width: 100%;
+}
+
+body {
+	text-align: center;
+	height: 100%;
+	min-height: 100%;
+	width: 100%;
+}
+
+.display {
+	width: 400px;
+	height: 120px;
+	border: outset;
+	border-width: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	display: table;
+}
+
+.centereddisplay {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#question {
+	position: relative;
+	font-size: 20pt;
+	background-color: #FFFF66;
+}
+
+#answer {
+	position: relative;
+	font-size: 12pt;
+	top: 20px;
+}
+
+.hiddenAnswer {
+	background-color: white;
+	font-family: sans-serif;
+	font-size: small;
+}
+
+.visibleAnswer {
+	background-color: #FFFF66;
+	font-family: serif;
+	font-size: large;
+}
+
+.visible {
+	visibility: visible;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.doneMessage {
+	font: x-large;
+}
+
+#response {
+	position: relative;
+	top: 40px;
+}
+
+#prompt {
+	visible: visible;
+	height: 25px;
+}
+
+#ad {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	height: 30px;
+	font-size: xx-small;
+	position: relative;
+	top: 70px;
+}

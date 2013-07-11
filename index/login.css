@@ -1,0 +1,33 @@
+#title {
+	margin-left:auto;
+	margin-right:auto;
+	display:table;
+	text-align:center;
+}
+
+#msg, #logincontrols {
+	margin-left:auto;
+	margin-right:auto;
+	display:table;
+	text-align:center;
+}
+
+#msg {
+	font-size:large;
+	color:red
+}
+
+#name {
+	visibility:hidden;
+	font-size:x-large;
+}
+
+#logincontrols td {
+	font-size:small;
+	text-align:left;
+}
+
+#greeting {
+	margin-left:20%;
+	margin-right:20%;
+}

@@ -1,0 +1,113 @@
+<project name="Magpie" default="build">
+
+	<description>Magpie</description>
+
+
+	<!-- Tomcat directory (each developer should change this) -->
+
+	<property name="tomcat_dir" location="/home/stephen/src/tomcat/" />
+	<property name="tomcat_lib" location="${tomcat_dir}/lib" />
+
+
+    <!-- Tell Ant where to find the Tomcat jars -->
+    <!-- (See
+    http://paulgrenyer.blogspot.in/2011/11/catalina-ant-for-tomcat-7.html) -->
+    <path id="catalina-ant-classpath">
+        <fileset dir="${tomcat_lib}">
+            <include name="catalina-ant.jar"/>
+            <include name="tomcat-coyote.jar"/>
+            <include name="tomcat-util.jar"/>
+            <include name="tomcat-juli.jar"/>
+        </fileset>
+    </path>
+
+	<!-- Destination directories -->
+
+	<property name="magpie_path" location="${tomcat_dir}/webapps/magpie" />
+	<property name="magpie_sandbox_path" location="${tomcat_dir}/webapps/magpie_sand" />
+
+
+	<!-- Temp directories -->
+
+	<property name="classes" location="/tmp/classes" />
+    <property name="url" value="http://localhost:13579/manager/text" />
+    <property name="username" value="stephenant" />
+    <property name="password" value="iloverae" />
+    <property name="path" value="/magpie" />
+
+
+	<!-- Source directories -->
+
+	<property name="src" location="src" />
+	<property name="web_services" location="web_services" />
+	<property name="data_collection" location="data_collection" />
+	<property name="js_lib" location="js_lib" />
+	<property name="webinf" location="WEB-INF" />
+	<property name="lib" location="${webinf}/lib" />
+	<property name="img" location="images" />
+	<property name="conf" location="conf" />
+	<property name="index" location="index" />
+
+    <taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask" 
+        classpathref="catalina-ant-classpath" />
+
+	<!-- Targets -->
+
+	<target name="build" depends="deploy,reload" />
+
+	<target name="compile" >
+		<mkdir dir="${classes}" />
+		<javac srcdir="${src}" destdir="${classes}" debug="true" includeantruntime="false">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="clean_dest" >
+		<delete dir="${magpie_path}" />
+	</target>
+
+	<target name="deploy" depends="compile,clean_dest" >
+		<copy todir="${magpie_path}/WEB-INF/classes">
+			<fileset dir="${classes}" includes="**/*.class" />
+		</copy>
+		<copy todir="${magpie_path}" >
+			<fileset dir="${index}" includes="*.jsp *.js *.html *.css" />
+		</copy>
+		<copy todir="${magpie_path}/web_services" >
+			<fileset dir="${web_services}" includes="*.jsp" />
+		</copy>
+		<copy todir="${magpie_path}/data_collection" >
+			<fileset dir="${data_collection}" includes="*.jsp" />
+		</copy>
+		<copy todir="${magpie_path}/js_lib" >
+			<fileset dir="${js_lib}" includes="*.js" />
+		</copy>
+		<copy todir="${magpie_path}/images" >
+			<fileset dir="${img}" includes="*.jpg *.gif *.png" />
+		</copy>
+		<copy todir="${magpie_path}/WEB-INF/lib" >
+			<fileset dir="${lib}" includes="*.jar" />
+		</copy>
+		<copy todir="${magpie_path}/WEB-INF" >
+			<fileset dir="${webinf}" includes="web.xml" />
+		</copy>
+		<copy todir="${magpie_path}/WEB-INF/classes" >
+			<fileset dir="${conf}" includes="*.properties" />
+		</copy>
+	</target>
+
+    <target name="reload" description="Reload web application"
+        depends="deploy">
+        <reload url="${url}" username="${username}" password="${password}"
+            path="${path}" />
+    </target>
+
+	<target name="clean" >
+		<delete dir="${classes}/edu" />
+	</target>
+
+</project>

@@ -1,0 +1,16 @@
+1. Get CRNs for all foreign language classes.
+2. Give accounts to all new instructors.
+3. Insert courses into the course table manually.
+4. In vim, set textwidth=somethingBig.
+5. On Firefox, load up each CRNs summary class list.
+6. Right-click on page, choose "This Frame | View Frame Source."
+7. Copy all (CTRL-A) and paste into vim.
+8. Save. Repeat for all sections, saving into separate file. Make sure that
+the names of the roster files are "sec#.html", where the "#" is the section
+number. (Section # must be 4th character.)
+9. Open each of the files in vim, and type:
+        :v/mailto/d
+10. Delete the bottom two huge "email class list" lines.
+11. Run the C++ program "importStudentRoster" on each of the roster files.
+
+

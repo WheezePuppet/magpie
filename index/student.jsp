@@ -20,7 +20,7 @@
 			<div id=question class=display > 
 				<div class=centereddisplay></div> 
 			</div> 
-			<div id=answer class=display onclick="handleAnswerClick();" > 
+			<div id=answer class=display >
 				<div class=centereddisplay></div> 
 			</div> 
 			<div>
@@ -30,9 +30,5 @@
 	</div> 
 	<%@ include file="header.jsp" %>
 	<div id="ad">This application is brought to you by the UMW Computer Science department</div> 
-	<script type="text/javascript"> 
-		populateResponseDiv();
-		getFirstCard();
-	</script> 
 </body> 
 </html> 

@@ -5,7 +5,7 @@
 
 	<!-- Tomcat directory (each developer should change this) -->
 
-	<property name="tomcat_dir" location="/home/stephen/src/tomcat/" />
+	<property name="tomcat_dir" location="/home/stephen/etc/apache-tomcat-6.0.26/" />
 	<property name="tomcat_lib" location="${tomcat_dir}/lib" />
 
 
@@ -30,7 +30,7 @@
 	<!-- Temp directories -->
 
 	<property name="classes" location="/tmp/classes" />
-    <property name="url" value="http://localhost:13579/manager/text" />
+    <property name="url" value="http://rosemary.umw.edu:13579/manager/html/reload?path=/magpie" />
     <property name="username" value="stephenant" />
     <property name="password" value="iloverae" />
     <property name="path" value="/magpie" />

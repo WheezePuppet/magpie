@@ -1,36 +1,9 @@
+
+$(document).ready(function() {
+
 var buttonsDisabled = true;
-var MAGPIE = {};
 
-$(document).keypress(function(e) {
-	// space bar
-	if(e.which == 32) {
-		handleAnswerClick();
-		return false;
-	}
-
-	// 0-5
-	if(e.which >= 48 && e.which <= 53 && $.cookie("gradingGroup") == "score") {
-		if(!buttonsDisabled)
-			gradeCard(e.which-48);
-		return false;
-	}
-
-	// y
-	if(e.which == 121 && $.cookie("gradingGroup") == "timer") {
-		if(!buttonsDisabled)
-			scoreCard(true);
-		return false;
-	}
-
-	// n
-	else if(e.which == 110 && $.cookie("gradingGroup") == "timer") {
-		if(!buttonsDisabled)
-			scoreCard(false);
-		return false;
-	}
-});
-
-function getCard(url) {
+var getCard = function(url) {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
 		handleGetCardResponse(request);
@@ -39,7 +12,7 @@ function getCard(url) {
 	request.send("");
 }
 
-function handleGetCardResponse(ajaxCall) {
+var handleGetCardResponse = function(ajaxCall) {
 	if (ajaxCall.readyState != 4 || ajaxCall.status != 200)
 		return;
 
@@ -60,42 +33,43 @@ function handleGetCardResponse(ajaxCall) {
 		return;
 	}
 
-	MAGPIE.card = response.card;
-	MAGPIE.card.question = MAGPIE.card.question.replace(/\n/g, "<br />");
-	MAGPIE.card.answer = MAGPIE.card.answer.replace(/\n/g, "<br />");
+	card = response.card;
+	card.question = card.question.replace(/\n/g, "<br />");
+	card.answer = card.answer.replace(/\n/g, "<br />");
 
-	$('#question .centereddisplay').html(MAGPIE.card.question);
+	$('#question .centereddisplay').html(card.question);
 
 	var answer = $('#answer .centereddisplay');
 	answer.text("(Click or press space to show answer)");
 	answer.removeClass('visibleAnswer');
 	answer.addClass('hiddenAnswer');
+    answer.click(handleAnswerClick);
 
 	$('#prompt').removeClass('visible');
 	$('#prompt').addClass('hidden');
-	MAGPIE.hideTime = new Date().getTime();
-	MAGPIE.hidden = true;
+	hideTime = new Date().getTime();
+	hidden = true;
 }
 
-function handleAnswerClick() {
-	if (!MAGPIE.hidden)
+var handleAnswerClick = function() {
+	if (!hidden)
 		return;
 
-	MAGPIE.hidden = false;
+	hidden = false;
 	
 	var answer = $('#answer .centereddisplay');
 	answer.removeClass('hiddenAnswer');
 	answer.addClass('visibleAnswer');
-	answer.html(MAGPIE.card.answer);
+	answer.html(card.answer);
 
-	MAGPIE.showTime = new Date().getTime();
+	showTime = new Date().getTime();
 
 	setButtonsDisabled(false);
 	$('#prompt').removeClass('hidden');
 	$('#prompt').addClass('visible');
 }
 
-function setButtonsDisabled(disabled) {
+var setButtonsDisabled = function(disabled) {
 	buttonsDisabled = disabled;
 
 	var selector = $('#response').children('button');
@@ -105,45 +79,45 @@ function setButtonsDisabled(disabled) {
 		selector.removeAttr('disabled');
 }
 
-function getFirstCard() {
+var getFirstCard = function() {
 	setButtonsDisabled(true);
 	getCard("web_services/getCard.jsp?dontcache=" + new Date().getTime());
 }
 
-function gradeCard(grade) {
+var gradeCard = function(grade) {
 	setButtonsDisabled(true);
 	getCard(getGradeUrl(grade > 2, grade));
 }
 
-function scoreCard(success) {
+var scoreCard = function(success) {
 	setButtonsDisabled(true);
 	getCard(getGradeUrl(success));
 }
 
-function getGradeUrl(success, grade) {
+var getGradeUrl = function(success, grade) {
 	return 'web_services/gradeCard.jsp' +
-		"?cid=" + MAGPIE.card.cid +
+		"?cid=" + card.cid +
 		(grade != null ? "&grade=" + grade : "") +
 		"&success=" + success +
-		"&time=" + (MAGPIE.showTime - MAGPIE.hideTime) +
+		"&time=" + (showTime - hideTime) +
 		"&dontcache=" + new Date().getTime();
 }
 
-function getButton(score) {
+var getButton = function(score) {
 	return $('<button>')
 		.attr('id', 'b' + score)
 		.click(function() { gradeCard(score); })
 		.text(score);
 }
 
-function getPrompt(text) {
+var getPrompt = function(text) {
 	return $('<div>')
 		.attr('id', 'prompt')
 		.addClass('hidden')
 		.text(text);
 }
 
-function populateResponseDiv() {
+var populateResponseDiv = function() {
 	var response = $('#response');
 	response.empty();
 
@@ -175,3 +149,36 @@ function populateResponseDiv() {
 
 	response.append('<br /><br />');
 }
+
+$(document).keypress(function(e) {
+	// space bar
+	if(e.which == 32) {
+		handleAnswerClick();
+		return false;
+	}
+
+	// 0-5
+	if(e.which >= 48 && e.which <= 53 && $.cookie("gradingGroup") == "score") {
+		if(!buttonsDisabled)
+			gradeCard(e.which-48);
+		return false;
+	}
+
+	// y
+	if(e.which == 121 && $.cookie("gradingGroup") == "timer") {
+		if(!buttonsDisabled)
+			scoreCard(true);
+		return false;
+	}
+
+	// n
+	else if(e.which == 110 && $.cookie("gradingGroup") == "timer") {
+		if(!buttonsDisabled)
+			scoreCard(false);
+		return false;
+	}
+});
+
+populateResponseDiv();
+getFirstCard();
+});

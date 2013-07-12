@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractItemManager<T extends AbstractItem> {
 	private final String table;
@@ -53,6 +56,26 @@ public abstract class AbstractItemManager<T extends AbstractItem> {
 	public synchronized T get(int id) {
 		return items.get(id);
 	}
+
+    public synchronized List<T> getNRandomItemsNotEqualTo(
+        int n, int unwantedId) {
+
+        List<Integer> allKeys = new ArrayList<Integer>(items.keySet());
+        Random r = new Random();
+        int nItems = allKeys.size();
+        List<Integer> theItemKeys = new ArrayList<Integer>();
+        List<T> theItems = new ArrayList<T>();
+        for (int i=0; i<n; i++) {
+            Integer candidateKey = allKeys.get(r.nextInt(nItems));
+            while (candidateKey == unwantedId  ||
+                theItemKeys.contains(candidateKey)) {
+                candidateKey = allKeys.get(r.nextInt(nItems));
+            }
+            theItemKeys.add(candidateKey);
+            theItems.add(items.get(candidateKey));
+        }
+        return theItems;
+    }
 
 	public synchronized void remove(int id) {
 		remove(get(id));

@@ -12,6 +12,8 @@ public class StudentManager extends AbstractItemManager<Student> {
 	}
 
 	public synchronized Student get(String username) {
+System.out.println("In StudentManager.get(). There are " + items.size() + " of them.");
+System.out.println("and username is " + username);
 		for (Student student : items.values()) {
 			if (student.getUsername().equals(username))
 				return student;

@@ -12,6 +12,7 @@
 	if (debug == null || !debug.equals("true"))
 		password = new SHA1Generator().SHA1(password);
 
+System.out.println("Calling userhelper with " + username + ", " + password);
 	User user = UserHelper.getUser(username, password);
 
 	if (user == null) {

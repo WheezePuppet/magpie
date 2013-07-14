@@ -13,6 +13,7 @@ public class UserHelper {
 
 	public synchronized static User getUser(String username, String password) {
 		User user = getUser(username);
+System.out.println("in user helper. User is " + user);
 
 		if (user == null || !user.getPassword().equals(password))
 			return null;

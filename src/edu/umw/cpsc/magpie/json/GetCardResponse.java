@@ -21,12 +21,15 @@ public class GetCardResponse {
 	public GetCardResponse(String status, int time, Card card) {
         init();
 		this.status = status;
-		this.card = card;
-		this.time = time;
-        List<Card> otherCards = 
-            CardManager.instance().getNRandomItemsNotEqualTo(4, card.getId());
-        for (int i=0, n=otherCards.size(); i<n; i++) {
-            otherAnswers.add(otherCards.get(i).getAnswer());
+        if (!status.equals("done")) {
+            this.card = card;
+            this.time = time;
+            List<Card> otherCards = 
+                CardManager.instance().getNRandomItemsNotEqualTo(4, 
+                                                            card.getId());
+            for (int i=0, n=otherCards.size(); i<n; i++) {
+                otherAnswers.add(otherCards.get(i).getAnswer());
+            }
         }
 	}
 

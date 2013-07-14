@@ -16,8 +16,8 @@
         <fileset dir="${tomcat_lib}">
             <include name="catalina-ant.jar"/>
             <include name="tomcat-coyote.jar"/>
-            <include name="tomcat-util.jar"/>
-            <include name="tomcat-juli.jar"/>
+<!--            <include name="tomcat-util.jar"/>
+            <include name="tomcat-juli.jar"/> -->
         </fileset>
     </path>
 
@@ -30,7 +30,7 @@
 	<!-- Temp directories -->
 
 	<property name="classes" location="/tmp/classes" />
-    <property name="url" value="http://rosemary.umw.edu:13579/manager/html/reload?path=/magpie" />
+    <property name="url" value="http://rosemary.umw.edu:12579/manager" />
     <property name="username" value="stephenant" />
     <property name="password" value="iloverae" />
     <property name="path" value="/magpie" />

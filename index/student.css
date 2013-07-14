@@ -88,3 +88,42 @@ body {
 	position: relative;
 	top: 70px;
 }
+
+.choice {
+    cursor : pointer;
+    font-size : 16pt;
+    margin-right : 15px;
+    padding-right : 15px;
+    padding-left : 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+#multiplechoice {
+    margin : auto;
+    border : 5px outset;
+}
+
+#multiplechoice td {
+/*    padding : 5px; */
+    border : 1px hidden;
+}
+
+#multiplechoice tr {
+    padding : 5px;
+}
+
+.keylabel {
+    text-align : center;
+    font-size : 8pt;
+    color : grey;
+}
+
+#multiplechoice .highlitrow {
+	background-color: #FFFF66;
+    border : 1px solid grey;
+}
+
+.confirmedChoice {
+	background-color: green;
+}

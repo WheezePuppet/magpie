@@ -33,7 +33,9 @@ public class Student extends User implements Comparable<Student> {
 
 		try {
 			String group = resultSet.getString("gradingGroup");
-			gradingGroup = group.equals("score") ? GradingGroup.SCORE : GradingGroup.TIMER;
+			gradingGroup = group.equals("score") ? GradingGroup.SCORE : 
+                (group.equals("timer") ? 
+                    GradingGroup.TIMER : GradingGroup.MULT_CHOICE);
 
 			ResultSet reviewRs = MagpieConnection.instance().executeQuery("SELECT * FROM review WHERE uid='" + getId() + "'");
 			while (reviewRs.next())

@@ -30,8 +30,8 @@ public class Course extends AbstractItem {
             // Spring 2011 - for simplicity (since the schema associates each
             // deck with a single course) simply assume all courses have all
             // decks.
-			ResultSet deckRs = MagpieConnection.instance().executeQuery("SELECT * FROM deck");
-			//ResultSet deckRs = MagpieConnection.instance().executeQuery("SELECT * FROM deck WHERE courseid='" + getId() + "'");
+			//ResultSet deckRs = MagpieConnection.instance().executeQuery("SELECT * FROM deck");
+			ResultSet deckRs = MagpieConnection.instance().executeQuery("SELECT * FROM deck WHERE courseid='" + getId() + "'");
 			while (deckRs.next())
 				deckIds.add(deckRs.getInt("did"));
 

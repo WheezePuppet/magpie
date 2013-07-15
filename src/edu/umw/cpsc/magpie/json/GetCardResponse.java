@@ -3,6 +3,7 @@ package edu.umw.cpsc.magpie.json;
 import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import edu.umw.cpsc.magpie.core.Card;
+import edu.umw.cpsc.magpie.core.Student;
 import edu.umw.cpsc.magpie.core.CardManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +19,16 @@ public class GetCardResponse {
 		this.status = status;
 	}
 
-	public GetCardResponse(String status, int time, Card card) {
+	public GetCardResponse(String status, int time, Card card,
+        Student student) {
         init();
 		this.status = status;
         if (!status.equals("done")) {
             this.card = card;
             this.time = time;
             List<Card> otherCards = 
-                CardManager.instance().getNRandomItemsNotEqualTo(4, 
-                                                            card.getId());
+                student.getNRandomActiveCardsWithAnswerNot(4, 
+                                                        card.getAnswer());
             for (int i=0, n=otherCards.size(); i<n; i++) {
                 otherAnswers.add(otherCards.get(i).getAnswer());
             }

@@ -11,6 +11,7 @@
 	} else {
 		Card card = student.getNextCard();
 		int timeStudying = student.getTime();
-		out.println(new GetCardResponse(card == null ? "done" : "success", timeStudying, card));
+		out.println(new GetCardResponse(card == null ? "done" : "success",
+timeStudying, card, student));
 	}
 %>

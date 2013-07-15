@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.ResultSet;
+import java.util.Random;
 import edu.umw.cpsc.magpie.util.SHA1Generator;
 
 public abstract class User extends AbstractItem {
@@ -153,6 +154,24 @@ public abstract class User extends AbstractItem {
 
 		return matches;
 	}
+
+    public synchronized List<Card> getNRandomActiveCardsWithAnswerNot(
+        int n, String unwantedAnswer) {
+
+        List<Card> allCards = getActiveCards();
+        Random r = new Random();
+        int numCards = allCards.size();
+        List<Card> theCards = new ArrayList<Card>();
+        for (int i=0; i<n; i++) {
+            Card c = allCards.get(r.nextInt(numCards));
+            while (c.getAnswer().equals(unwantedAnswer)  ||
+                theCards.contains(c)) {
+                c = allCards.get(r.nextInt(numCards));
+            }
+            theCards.add(c);
+        }
+        return theCards;
+    }
 
 	public String getTable() {
 		return "user";

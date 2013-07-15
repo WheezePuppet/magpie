@@ -67,7 +67,8 @@ var populateMultipleChoiceAnswers = function(response) {
     correctAnswerNumber = Math.floor((Math.random()*numChoices)+1); 
     for (var i=0; i<numChoices; i++) {
         if (i+1 == correctAnswerNumber) {
-            $("#choice" + (i+1)).html(response.card.answer);
+	        var theAnswer = response.card.answer.replace(/\n/g, "<br/>");
+            $("#choice" + (i+1)).html(theAnswer);
         } else {
             $("#choice" + (i+1)).html(other[i]);
         }
@@ -240,32 +241,52 @@ var populateResponseDiv = function() {
 };
 
 $(document).keypress(function(e) {
-	// space bar
-	if(e.which == 32) {
-		handleAnswerClick();
-		return false;
-	}
 
-	// 0-5
-	if(e.which >= 48 && e.which <= 53 && $.cookie("gradingGroup") == "score") {
-		if(!buttonsDisabled)
-			gradeCard(e.which-48);
-		return false;
-	}
+    if ($.cookie("gradingGroup") == "timer"  ||
+        $.cookie("gradingGroup") == "score") {
 
-	// y
-	if(e.which == 121 && $.cookie("gradingGroup") == "timer") {
-		if(!buttonsDisabled)
-			scoreCard(true);
-		return false;
-	}
+        // space bar
+        if(e.which == 32) {
+            handleAnswerClick();
+            return false;
+        }
+    }
 
-	// n
-	else if(e.which == 110 && $.cookie("gradingGroup") == "timer") {
-		if(!buttonsDisabled)
-			scoreCard(false);
-		return false;
-	}
+    // 0-5 for score people
+    if(e.which >= 48 && e.which <= 53 && 
+        $.cookie("gradingGroup") == "score") {
+        if(!buttonsDisabled)
+            gradeCard(e.which-48);
+        return false;
+    }
+
+    // 1-4 for multiple-choice people
+    if(e.which >= 49 && e.which <= 52 && 
+        $.cookie("gradingGroup") == "multi") {
+        choose(e.which-48)();
+        return false;
+    }
+
+    // space bar for multiple-choice people
+    if(e.which == 32  &&
+        $.cookie("gradingGroup") == "multi") {
+        choose(5)();
+        return false;
+    }
+
+    // y
+    if(e.which == 121 && $.cookie("gradingGroup") == "timer") {
+        if(!buttonsDisabled)
+            scoreCard(true);
+        return false;
+    }
+
+    // n
+    else if(e.which == 110 && $.cookie("gradingGroup") == "timer") {
+        if(!buttonsDisabled)
+            scoreCard(false);
+        return false;
+    }
 });
 
 populateResponseDiv();

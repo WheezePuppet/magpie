@@ -18,7 +18,6 @@ public class Card extends AbstractItem {
 			inverseid = resultSet.getInt("inverseid");
 			deckid = resultSet.getInt("did");
 			question = resultSet.getString("question");
-System.out.println("The question is: " + question);
 			answer = resultSet.getString("answer");
 		} catch (Exception e) {
 			e.printStackTrace(System.err);

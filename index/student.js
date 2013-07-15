@@ -144,19 +144,24 @@ var getPrompt = function(text) {
 var choose = function(choice) {
     return function() {
 	    showTime = new Date().getTime();
-        $("#choice"+choice).addClass("confirmedChoice");
         if (choice == correctAnswerNumber) {
-            // ?? $("#choice"+choice).css("background-color","blue");
-            //setTimeout(getCard, 500, getGradeUrl(true, 6));
-            getCard(getGradeUrl(true, 6));
+            $("#choice"+choice).addClass("confirmedCorrectChoice");
+            setTimeout(function() {
+                getCard(getGradeUrl(true, 6));
+                for (var i=0; i<numChoices+1; i++) {
+                    $("#choice"+(i+1)).removeClass("confirmedCorrectChoice");
+                }
+            }, 400);
         } else {
+            if (choice != numChoices+1) {
+                $("#choice"+choice).addClass("confirmedWrongChoice");
+            }
             alert("Correct answer was (" + correctAnswerNumber +
                 ") " + $("#choice"+correctAnswerNumber).text());
 	        getCard(getGradeUrl(false, 0));
-        }
-        for (var i=0; i<numChoices+1; i++) {
-            $("#choice"+(i+1)).removeClass("confirmedChoice");
-        $("#choice"+(i+1)).css("background-color","");
+            for (var i=0; i<numChoices+1; i++) {
+                $("#choice"+(i+1)).removeClass("confirmedWrongChoice");
+            }
         }
     };
     

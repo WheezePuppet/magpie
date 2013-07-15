@@ -124,6 +124,10 @@ body {
     border : 1px solid grey;
 }
 
-.confirmedChoice {
+#multiplechoice .confirmedCorrectChoice {
 	background-color: green;
+}
+
+#multiplechoice .confirmedWrongChoice {
+	background-color: red;
 }

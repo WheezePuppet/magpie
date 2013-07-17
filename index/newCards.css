@@ -1,30 +1,43 @@
-#newCards {
-    margin: auto;
+#cardTable {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
     width:820px;
 }
-#newCards table {
+#cardTable table {
     table-layout: fixed;
 }
-#newCards td.question {
+#cardTable td.question {
     text-align: right;
     width: 200px;
 }
-#newCards td.answer {
+#cardTable td.answer {
     text-align: left;
     width: 200px;
 }
-#newCards td.separator {
+#cardTable td.separator {
     text-align: center;
     width: 10px;
 }
-#firstHalfNewCards {
+#firstHalfTableCards {
     float:left;
     width:410px;
 }
-#secondHalfNewCards {
+#secondHalfTableCards {
     float:right;
     width:410px;
 }
 #button {
-    margin-top: 50px;
+    margin-top:100px;
+}
+#newCardsTitle, #recentlyMissedTitle {
+    font-size:20pt;
+    margin-top:50px;
+}
+#newCardsDiv, #recentlyMissedCardsDiv {
+    margin-top:50px;
+}
+#recentlyMissedCardsDiv {
+    position:relative;
+    top:40px;
 }

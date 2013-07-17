@@ -185,12 +185,54 @@ public class Student extends User implements Comparable<Student> {
 		return matches;
 	}
 
+	public synchronized ArrayList<Card> getNewCards() {
+		ArrayList<Card> matches = new ArrayList<Card>();
+
+		for(Deck deck : getActiveDecks()) {
+			for(Card card : deck.getCards()) {
+				if (!hasSeenBefore(card))
+					matches.add(card);
+			}
+		}
+
+		return matches;
+	}
+
+	public synchronized ArrayList<Card> getRecentlyMissedCards() {
+		ArrayList<Card> matches = new ArrayList<Card>();
+
+		for(Deck deck : getActiveDecks()) {
+			for(Card card : deck.getCards()) {
+				if (hasMissedRecently(card))
+					matches.add(card);
+			}
+		}
+
+		return matches;
+	}
+
 	public boolean hasMemorized(Card card) {
 		Review review = getLastReviewFor(card);
 		if (review == null)
 			return false;
 
 		return review.getSuccess();
+	}
+
+	public boolean hasSeenBefore(Card card) {
+		Review review = getLastReviewFor(card);
+		if (review == null)
+			return false;
+        else
+			return true;
+	}
+
+	public boolean hasMissedRecently(Card card) {
+		Review review = getLastReviewFor(card);
+		if (review == null)
+			return false;
+
+		return !review.getSuccess();
 	}
 
 	public boolean hasScheduled(Card card) {

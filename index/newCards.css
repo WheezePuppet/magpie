@@ -1,0 +1,30 @@
+#newCards {
+    margin: auto;
+    width:820px;
+}
+#newCards table {
+    table-layout: fixed;
+}
+#newCards td.question {
+    text-align: right;
+    width: 200px;
+}
+#newCards td.answer {
+    text-align: left;
+    width: 200px;
+}
+#newCards td.separator {
+    text-align: center;
+    width: 10px;
+}
+#firstHalfNewCards {
+    float:left;
+    width:410px;
+}
+#secondHalfNewCards {
+    float:right;
+    width:410px;
+}
+#button {
+    margin-top: 50px;
+}

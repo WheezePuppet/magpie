@@ -30,7 +30,7 @@ System.out.println("Calling userhelper with " + username + ", " + password);
 	if (user.dueForPasswordChange())
 		response.sendRedirect("changePassword.jsp");
 	else if (user.getRole() == Role.STUDENT)
-		response.sendRedirect("student.jsp");
+		response.sendRedirect("newCards.jsp");
 	else if (user.getRole() == Role.TEACHER)
 		response.sendRedirect("teacher.jsp");
 	else

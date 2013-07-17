@@ -34,7 +34,7 @@ public class MagpieConnection {
 			//log.debug("Connecting to db '" + db + "' with username='" + user + "' and password='" + pass + "'");
 			connection = DriverManager.getConnection(db, user, pass);
 		} catch (Exception e) {
-			connection = null; // Make absolutely sure we'not not connected to any database if anything goes wrong--we don't want to bork data.
+			connection = null; // Make absolutely sure we're not connected to any database if anything goes wrong--we don't want to bork data.
 			log.error("Exception in setConnection(), about to print stacktrace.");
 			e.printStackTrace(System.err);
 		}

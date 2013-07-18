@@ -1,0 +1,10 @@
+tr.missingDay {
+    background-color:#EEEEEE;
+}
+tr.practiceDay {
+    background-color:#FFFF66;
+}
+table#progress td {
+    margin:1px;
+    text-align:center;
+}

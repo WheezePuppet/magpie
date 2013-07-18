@@ -284,6 +284,22 @@ public class Student extends User implements Comparable<Student> {
 		return (int) ((totalTime + (MINUTE_MS/2)) / MINUTE_MS);
 	}
 
+    public int getNumSuccessfulReviews(java.util.Date date) {
+		ReviewList dateReviews = reviews.getFor(date);
+
+		int totalSuccessful = 0;
+		for (int i = 0; i < dateReviews.size(); i++) {
+            if (dateReviews.get(i).getSuccess()) {
+                totalSuccessful++;
+            }
+        }
+        return totalSuccessful;
+    }
+
+    public int getNumTotalReviews(java.util.Date date) {
+		return reviews.getFor(date).size();
+    }
+
 	public double getAverageTime(Course course) {
 		// returns the time spent studying DURING a course, regardless of what material was actually being studied
 		double totalTime = 0;

@@ -1,6 +1,7 @@
 <%@ include file="redirectHeader.jsp" %>
 <%@ page import="edu.umw.cpsc.magpie.core.*"
          import="edu.umw.cpsc.magpie.util.DateHelper"
+         import="java.text.DecimalFormat"
          import="java.util.ArrayList"
          import="java.util.Date"
          import="java.util.Calendar" %>
@@ -9,12 +10,14 @@
 	<title>Magpie</title>
 	<link rel="stylesheet" type="text/css" href="header.css" />
 	<link rel="stylesheet" type="text/css" href="course.css" />
+	<link rel="stylesheet" type="text/css" href="progress.css" />
 </HEAD>
 <BODY>
 	<%@ include file="header.jsp" %>
 <%!
 	final int NUM_DAYS = 7;
 	final int MILLISECONDS_PER_DAY = 1000*60*60*24;
+    DecimalFormat percentFormat = new DecimalFormat(".0");
 %>
 <%
 	String username = (String) session.getAttribute("username");
@@ -27,8 +30,10 @@
 
 	out.println("<H1>Progress for " + student.getFirstName() + " " + student.getLastName() + "</H1>");
 
-    StringBuilder builder = new StringBuilder("<TABLE border=\"1\">");
-    builder.append("<TR><TH>Days</TH><TH>Minutes</TH><TH>Grade</TH></TR>");
+    StringBuilder builder = new StringBuilder(
+        "<TABLE id=progress cellpadding=\"2\" cellspacing=\"2\" border=\"1\">");
+    builder.append("<TR><TH>Days</TH><TH>Minutes</TH><TH>Num Cards</TH>" +
+        "<TH>% Correct</TH></TR>");
 
     for (Calendar monday : mondays) {
 
@@ -37,64 +42,33 @@
             continue;
         }
 
-        long weeklyGrade = getWeeklyGrade(student, course, monday);
+        for (int i = 0; i < 7; i++) {
 
-        // Mon-Thurs
-        for (int i = 0; i < 4; i++) {
-            builder.append("<TR>");
-            Date date = DateHelper.addDays(new Date(monday.getTimeInMillis()), i).getTime();
-            String dateClass = course.includesDate(date) ? "" : "class=\"ungraded\"";
-            builder.append("<TD " + dateClass + ">" + DateHelper.format(date) + "</TD>");
+            Date date = DateHelper.addDays(
+                    new Date(monday.getTimeInMillis()), i).getTime();
 			int min = student.getTime(date);
+			int numSuccessful = student.getNumSuccessfulReviews(date);
+			int numTotal = student.getNumTotalReviews(date);
 
-			boolean complete = min >= requiredMinutesPerDay ||
-				student.finishedOn(date) ||
-				student.troubleOn(date);
+            if (min == 0) {
+                builder.append("<TR class=missingDay >");
+            } else {
+                builder.append("<TR class=practiceDay >");
+            }
+            builder.append("<TD class=dateClass >" + DateHelper.format(date) + "</TD>");
 
-			dateClass = "class=\"ungraded\"";
+			builder.append("<TD class=dateClass >" + min + "</TD>");
+			builder.append("<TD class=numCards >" + numTotal + "</TD>");
 
-			if(course.includesDate(date)) {
-				dateClass = complete ? "class=\"finished\"" : "";
-			}
-
-			builder.append("<TD " + dateClass + ">" + min + "</TD>");
-            if (i==0) {
-                builder.append("<TD rowspan=5 align=center>Grade:<br>" + weeklyGrade + "%</TD></TR>");
+            if (numTotal > 0) {
+                builder.append("<TD class=percentCorrect >" + 
+                    percentFormat.format(
+                            100 * ((double)numSuccessful)/numTotal) + 
+                    "%</TD>");
+            } else {
+                builder.append("<TD class=percentCorrect >&#8212</TD>");
             }
         }
-
-        String dateClass = 
-            course.includesDate(DateHelper.addDays(new Date(monday.getTimeInMillis()),4)) ||
-            course.includesDate(DateHelper.addDays(new Date(monday.getTimeInMillis()),5)) ||
-            course.includesDate(DateHelper.addDays(new Date(monday.getTimeInMillis()),6)) ?
-            "" : "class=\"ungraded\"";
-
-        // Fri-Sun
-        builder.append("<TR>");
-        builder.append("<TD " + dateClass + ">" + DateHelper.format(DateHelper.addDays(new Date(monday.getTimeInMillis()), 4)) + " - " + DateHelper.format(DateHelper.addDays(new Date(monday.getTimeInMillis()), 6)) + "</TD>");
-
-		int min = 0;
-		boolean finished = false;
-		boolean graded = false;
-		for (int day = 4; day < 7; day++) {
-			Date date = DateHelper.addDays(new Date(monday.getTimeInMillis()), day).getTime();
-			min += student.getTime(date);
-
-			if(student.finishedOn(date) || student.troubleOn(date))
-				finished = true;
-			if(course.includesDate(date))
-				graded = true;
-		}
-
-		boolean complete = min >= requiredMinutesPerDay || finished;
-
-		dateClass = "class=\"ungraded\"";
-
-		if(graded) {
-			dateClass = complete ? "class=\"finished\"" : "";
-		}
-
-		builder.append("<TD " + dateClass + ">" + min + "</TD></TR>");
 
     }
     builder.append("</TABLE>");
@@ -102,55 +76,5 @@
     out.println(builder);
 %>
 
-<%!
-    long getWeeklyGrade(Student s, Course c, Calendar monday) {
-
-        int requiredMinutesPerDay = c.getMinsPerDay();
-
-        int gradedDays = 0;
-        int completedDays = 0;
-
-        // Mon-Thurs
-        for (int i = 0; i < 4; i++) {
-            Date date = DateHelper.addDays(new Date(monday.getTimeInMillis()), i).getTime();
-			int min = s.getTime(date);
-
-			boolean complete = min >= requiredMinutesPerDay ||
-				s.finishedOn(date) ||
-				s.troubleOn(date);
-
-			if(c.includesDate(date)) {
-				gradedDays++;
-				if (complete)
-					completedDays++;
-			}
-
-        }
-
-        // Fri-Sat
-		int min = 0;
-		boolean finished = false;
-		boolean graded = false;
-		for (int day = 4; day < 7; day++) {
-			Date date = DateHelper.addDays(new Date(monday.getTimeInMillis()), day).getTime();
-			min += s.getTime(date);
-
-			if(s.finishedOn(date) || s.troubleOn(date))
-				finished = true;
-			if(c.includesDate(date))
-				graded = true;
-		}
-
-		boolean complete = min >= requiredMinutesPerDay || finished;
-
-		if(graded) {
-			gradedDays++;
-			if(complete)
-				completedDays++;
-		}
-		long percentage = Math.round((double) completedDays / (double) gradedDays * 100);
-        return percentage;
-    }
-%>
 </BODY>
 </HTML>

@@ -46,6 +46,10 @@
             html += printCard(cards.get(i));
         }
 
+        if (cards.size() % 2 == 1) {
+            html += "<tr><td></td><td>.</td><td></td></tr>";
+        }
+
         html += "</table>";
         html += "</div>";
         html += "</div>";

@@ -7,7 +7,7 @@
 	if (user == null)
 		response.sendRedirect("login.jsp");
 	else if (user.getRole() == Role.STUDENT)
-		response.sendRedirect("newCards.jsp");
+		response.sendRedirect("preview.jsp");
 	else if (user.getRole() == Role.TEACHER)
 		response.sendRedirect("teacher.jsp");
 	else

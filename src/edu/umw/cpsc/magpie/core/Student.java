@@ -190,7 +190,7 @@ public class Student extends User implements Comparable<Student> {
 
 		for(Deck deck : getActiveDecks()) {
 			for(Card card : deck.getCards()) {
-				if (!hasSeenBefore(card))
+				if (!hasSeenBefore(card)  &&  card.getDir().equals("F"))
 					matches.add(card);
 			}
 		}

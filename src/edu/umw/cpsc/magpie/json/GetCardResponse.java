@@ -28,7 +28,7 @@ public class GetCardResponse {
             this.time = time;
             List<Card> otherCards = 
                 student.getNRandomActiveCardsWithAnswerNot(4, 
-                                                        card.getAnswer());
+                                            card.getAnswer(), card.getDir());
             for (int i=0, n=otherCards.size(); i<n; i++) {
                 otherAnswers.add(otherCards.get(i).getAnswer());
             }

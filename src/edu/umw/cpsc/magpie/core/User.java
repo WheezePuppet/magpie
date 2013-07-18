@@ -156,7 +156,7 @@ public abstract class User extends AbstractItem {
 	}
 
     public synchronized List<Card> getNRandomActiveCardsWithAnswerNot(
-        int n, String unwantedAnswer) {
+        int n, String unwantedAnswer, String dir) {
 
         List<Card> allCards = getActiveCards();
         Random r = new Random();
@@ -165,7 +165,7 @@ public abstract class User extends AbstractItem {
         for (int i=0; i<n; i++) {
             Card c = allCards.get(r.nextInt(numCards));
             while (c.getAnswer().equals(unwantedAnswer)  ||
-                theCards.contains(c)) {
+                theCards.contains(c)  ||  !c.getDir().equals(dir)) {
                 c = allCards.get(r.nextInt(numCards));
             }
             theCards.add(c);

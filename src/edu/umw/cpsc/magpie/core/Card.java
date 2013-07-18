@@ -11,6 +11,7 @@ public class Card extends AbstractItem {
 	private int deckid;
 	@Expose private String question;
 	@Expose private String answer;
+	@Expose private String dir;
 
 	public Card(ResultSet resultSet) {
 		try {
@@ -19,23 +20,11 @@ public class Card extends AbstractItem {
 			deckid = resultSet.getInt("did");
 			question = resultSet.getString("question");
 			answer = resultSet.getString("answer");
+			dir = resultSet.getString("dir");
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 		}
 	}
-
-	public Card(String question, String answer, int deckid) {
-		this(question, answer, deckid, -1);
-	}
-
-	public Card(String question, String answer, int deckid, int inverseid) {
-		this.question = question;
-		this.answer = answer;
-		this.deckid = deckid;
-		this.inverseid = inverseid;
-
-		insert();
-	}	
 
 	// just for testing
 	static ReviewList scoreReviews = null;
@@ -109,6 +98,10 @@ public class Card extends AbstractItem {
 		return answer;
 	}
 
+	public String getDir() {
+		return dir;
+	}
+
 	protected String getTable() {
 		return "card";
 	}
@@ -119,8 +112,8 @@ public class Card extends AbstractItem {
 
 	protected String getInsertValues() {
 		if (inverseid == -1)
-			return "(question, answer, did) VALUES ('" + question + "', '" + answer + "', '" + deckid + "')";
+			return "(question, answer, did, dir) VALUES ('" + question + "', '" + answer + "', '" + deckid + "', '" + dir + "')";
 
-		return "(question, answer, did, inverseid) VALUES ('" + question + "', '" + answer + "', '" + deckid + "', '" + inverseid + "')";
+		return "(question, answer, did, inverseid, dir) VALUES ('" + question + "', '" + answer + "', '" + deckid + "', '" + inverseid + "', '" + dir + "')";
 	}
 }

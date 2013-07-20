@@ -160,9 +160,8 @@ var choose = function(choice) {
             if (choice != numChoices+1) {
                 $("#choice"+choice).addClass("confirmedWrongChoice");
             }
-            alert("Correct answer was:\n(" + correctAnswerNumber +
-                ") " +
-$("#choice"+correctAnswerNumber).html().replace(/<br>/g,"\n"));
+            alert("Correct answer was:\n(" + correctAnswerNumber + ") " +
+                $("#choice"+correctAnswerNumber).html().replace(/<br>/g,"\n"));
 	        getCard(getGradeUrl(false, 0));
             for (var i=0; i<numChoices+1; i++) {
                 $("#choice"+(i+1)).removeClass("confirmedWrongChoice");

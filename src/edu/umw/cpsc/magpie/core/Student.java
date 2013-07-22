@@ -110,9 +110,8 @@ public class Student extends User implements Comparable<Student> {
 
         // Spring 2011 - make all students complete the entire 15 minutes,
         // filling the remainder with random cards if necessary.
-        // log.debug("Random!");
-        // return getRandomActiveCard();
-        return null;
+        log.debug("Random!");
+        return getRandomActiveCard();
 	}
 
 	public Review getLastReviewFor(Card card) {
@@ -201,12 +200,20 @@ public class Student extends User implements Comparable<Student> {
 	public synchronized ArrayList<Card> getRecentlyMissedCards() {
 		ArrayList<Card> matches = new ArrayList<Card>();
 
-		for(Deck deck : getActiveDecks()) {
-			for(Card card : deck.getCards()) {
-				if (hasMissedRecently(card))
-					matches.add(card);
-			}
-		}
+        try {
+            ResultSet recentlyMissedIds = 
+                MagpieConnection.instance().executeQuery(
+                    "select cid from review where success=0 and uid='" + id + 
+                    "' and date(reviewDatetime) >= CURDATE() - 1");
+
+            while (recentlyMissedIds.next()) {
+                matches.add(CardManager.instance().get(
+                    recentlyMissedIds.getInt(1)));
+            }
+        } catch (Exception e) {
+            System.out.println("Couldn't get recently missed cards! " +
+                e.getMessage());
+        }
 
 		return matches;
 	}

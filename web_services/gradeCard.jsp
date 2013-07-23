@@ -18,8 +18,10 @@
 	int time = Integer.parseInt(request.getParameter("time"));
 	student.gradeCard(cid, grade, success, time);
 
-	Card card = student.getNextCard();
+    CardAndReason cardAndReason = student.getNextCardAndReason();
+    Card card = cardAndReason.getCard();
+    String reason = cardAndReason.getReason();
 	int timeStudying = student.getTime();
 	out.println(new GetCardResponse(card == null ? "done" : "success",
-timeStudying, card, student));
+timeStudying, card, student, reason));
 %>

@@ -9,9 +9,11 @@
 	if(student == null) {
 		out.println(new GetCardResponse("nologin"));
 	} else {
-		Card card = student.getNextCard();
+		CardAndReason cardAndReason = student.getNextCardAndReason();
+		Card card = cardAndReason.getCard();
+        String reason = cardAndReason.getReason();
 		int timeStudying = student.getTime();
 		out.println(new GetCardResponse(card == null ? "done" : "success",
-timeStudying, card, student));
+timeStudying, card, student, reason));
 	}
 %>

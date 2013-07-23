@@ -10,6 +10,7 @@ import java.util.List;
 
 public class GetCardResponse {
 	@Expose private String status;
+	@Expose private String reason;
 	@Expose private Card card;
 	@Expose private int time;
 	@Expose private ArrayList<String> otherAnswers;
@@ -20,12 +21,13 @@ public class GetCardResponse {
 	}
 
 	public GetCardResponse(String status, int time, Card card,
-        Student student) {
+        Student student, String reason) {
         init();
 		this.status = status;
         if (!status.equals("done")) {
             this.card = card;
             this.time = time;
+            this.reason = reason;
             List<Card> otherCards = 
                 student.getNRandomActiveCardsWithAnswerNot(4, 
                                             card.getAnswer(), card.getDir());

@@ -15,6 +15,17 @@ public class Review extends AbstractItem {
 	private boolean success;
 	private int responseTime;
 
+public String toString() {
+    return "(" + 
+        id + "," +
+        studentid + "," +
+        cardid + "," +
+        date + "," +
+        time + "," +
+        score + "," +
+        success + "," +
+        responseTime + ")";
+}
 	public Review(ResultSet resultSet) {
 		try {
 			id = resultSet.getInt("rid");

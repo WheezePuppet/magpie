@@ -23,13 +23,29 @@ var handleGetCardResponse = function(ajaxCall) {
 	if (ajaxCall.readyState != 4 || ajaxCall.status != 200)
 		return;
 
-	var response = JSON.parse(ajaxCall.responseText);
+	var response = JSON.parse(ajaxCall.responseText),
+        reason = response.reason;
 	if (response.status == "nologin") {
 		window.location = "login.jsp";
 		return;
 	}
 
 	$("#time").text(response.time);
+
+    switch (reason) {
+    case "scheduled":
+        $("#reason").text("Scheduled card");
+        $("#reason").css("color","orange");
+        break;
+    case "unmemorized":
+        $("#reason").text("Unmemorized card");
+        $("#reason").css("color","red");
+        break;
+    case "random":
+        $("#reason").text("Random card");
+        $("#reason").css("color","green");
+        break;
+    }
 
 	if (response.status == "done") {
 		var testarea = $("#testarea");

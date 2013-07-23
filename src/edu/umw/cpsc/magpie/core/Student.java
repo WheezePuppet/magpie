@@ -77,7 +77,7 @@ public class Student extends User implements Comparable<Student> {
 		return gradingGroup;
 	}
 
-	public synchronized Card getNextCard() {
+	public synchronized CardAndReason getNextCardAndReason() {
 		log.debug("Getting next card for '" + username + "'");
 
 		Random random = new Random();
@@ -89,8 +89,9 @@ public class Student extends User implements Comparable<Student> {
 			if(scheduledCards.size() > 1 && lastCard != null)
 				scheduledCards.remove(lastCard);
 			
-			lastCard = scheduledCards.get(random.nextInt(scheduledCards.size()));
-			return lastCard;
+			lastCard = 
+                scheduledCards.get(random.nextInt(scheduledCards.size()));
+			return new CardAndReason(lastCard, "scheduled");
 		}
 
 		ArrayList<Card> unmemorizedCards = getActiveUnmemorizedCards();
@@ -99,7 +100,7 @@ public class Student extends User implements Comparable<Student> {
 		hand.refillFrom(unmemorizedCards);
 		if(hand.hasNext()) {
 			lastCard = hand.next(lastCard);
-			return lastCard;
+			return new CardAndReason(lastCard, "unmemorized");
 		}
 
 		//log.debug("'" + username + "' has finished his/her cards. Checking for DoneMarker...");
@@ -111,7 +112,7 @@ public class Student extends User implements Comparable<Student> {
         // Spring 2011 - make all students complete the entire 15 minutes,
         // filling the remainder with random cards if necessary.
         log.debug("Random!");
-        return getRandomActiveCard();
+        return new CardAndReason(getRandomActiveCard(), "random");
 	}
 
 	public Review getLastReviewFor(Card card) {

@@ -9,13 +9,15 @@
 <div id="header">
 <% if(role == Role.STUDENT) { %>
 	<a href="student.jsp">Practice!</a> |
-	<a href="instructions.jsp">Instructions</a> |
 	<a href="progress.jsp?courseid=<%= c.getId() %>">Progress</a> |
+	<a href="decks.jsp">Decks</a> |
+	<a href="instructions.jsp">Instructions</a> |
 <% } if(role == Role.TEACHER) { %>
 	<a href="index.jsp">Home</a> | 
 <% } %>
 	<a href="logout.jsp">Logout</a>
 <% if (role == Role.STUDENT) { %>
 <p>You have studied for <span id="time"><%= ((Student) theUser).getTime() %></span>  minutes today.</p>
+<div id=reason /></div>
 <% } %>
 </div>

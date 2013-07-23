@@ -38,13 +38,25 @@
 		to you. In any case, look at it for a moment and decide what its
 		translation is. If you can, visualize that translation briefly in
 		your mind.</li>
+<%
+	if (student.getGradingGroup().toDbString().equals("multi")) {
+%>
+        <li>Now, look at the multiple choice answers below, and choose one by
+        pressing the number keys 1-4 (or space), or by clicking on a choice.
+        Remember: this is not a multiple choice test! If you didn't know the 
+        word before looking at the choices, <i>don't</i> choose the right 
+        answer once you see the choices -- otherwise Magpie will conclude that 
+        you knew that word, and will not show it to you again for quite a 
+        while. When in doubt, press the space bar (or click on "Don't know") 
+        so that Magpie will continually test you on that word until you know 
+        it well.</li>
+<%
+	} else if (student.getGradingGroup().toDbString().equals("timer")) {
+%>
 		<li>When you've formed it in your mind (or decided you don't know
 		the answer) click the white box. (Alternatively, you can press the
 		spacebar.) This will bring up the correct definition. See whether
 		or not you were correct!</li>
-<%
-	if (student.getGradingGroup().toDbString().equals("timer")) {
-%>
 		<li>Now tell Magpie whether you had the right answer or not by 
 		clicking "Yes" or "No." (Alternatively, you can press the "y" or "n"
 		key on your keyboard.)
@@ -56,9 +68,14 @@
 		you, and Magpie will bring it up more frequently until you learn it.
 		</b>
 		</li>
+
 <%
 	} else {
 %>
+		<li>When you've formed it in your mind (or decided you don't know
+		the answer) click the white box. (Alternatively, you can press the
+		spacebar.) This will bring up the correct definition. See whether
+		or not you were correct!</li>
 		<li>Now tell Magpie how well you know that card, on a scale of 0
 		to 5. A score of 0 means "I didn't know that card at all," while 5
 		means "I knew it perfectly well." Note that any score from 0-2 means

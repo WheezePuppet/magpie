@@ -27,6 +27,7 @@ public class Student extends User implements Comparable<Student> {
 
 	private Hand hand = new Hand(this);
 	private Card lastCard;
+    private boolean lastCardCorrect = true;
 
 	public Student(ResultSet resultSet) {
 		super(resultSet);
@@ -81,6 +82,15 @@ public class Student extends User implements Comparable<Student> {
 		log.debug("Getting next card for '" + username + "'");
 
 		Random random = new Random();
+
+        if (!lastCardCorrect) {
+            ArrayList<Card> memorizedCards = getActiveMemorizedCards();
+            if (memorizedCards.size() > 0) {
+                lastCard = memorizedCards.get(random.nextInt(
+                        memorizedCards.size()));
+                return new CardAndReason(lastCard, "familiar");
+            } 
+        }
 
 		ArrayList<Card> scheduledCards = getActiveScheduledCards();
 		log.debug("Found " + scheduledCards.size() + " scheduled cards for '" + username + "'");
@@ -141,6 +151,8 @@ public class Student extends User implements Comparable<Student> {
 		reviews.add(review);
 
 		reschedule(cid);
+
+        lastCardCorrect = success;
 	}
 
 	private void reschedule(int cid) {
@@ -165,6 +177,19 @@ public class Student extends User implements Comparable<Student> {
 		for(Deck deck : getActiveDecks()) {
 			for (Card card : deck.getCards()) {
 				if (!hasMemorized(card))
+					matches.add(card);
+			}
+		}
+
+		return matches;
+	}
+
+	public synchronized ArrayList<Card> getActiveMemorizedCards() {
+		ArrayList<Card> matches = new ArrayList<Card>();
+
+		for(Deck deck : getActiveDecks()) {
+			for (Card card : deck.getCards()) {
+				if (hasMemorized(card))
 					matches.add(card);
 			}
 		}

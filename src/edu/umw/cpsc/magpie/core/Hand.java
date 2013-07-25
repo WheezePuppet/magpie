@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Hand {
-	private final int MAX_CARDS = 5;
+	private final int MAX_CARDS = 10;
 
 	private List<Card> cards = new ArrayList<Card>();
 	private Student student;

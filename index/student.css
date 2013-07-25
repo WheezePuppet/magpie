@@ -131,3 +131,7 @@ body {
 #multiplechoice .confirmedWrongChoice {
 	background-color: red;
 }
+
+#reason {
+    font-size: 10pt;
+}

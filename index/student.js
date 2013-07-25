@@ -45,6 +45,10 @@ var handleGetCardResponse = function(ajaxCall) {
         $("#reason").text("Random card");
         $("#reason").css("color","green");
         break;
+    case "familiar":
+        $("#reason").text("Familiar card");
+        $("#reason").css("color","blue");
+        break;
     }
 
 	if (response.status == "done") {

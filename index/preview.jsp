@@ -13,7 +13,6 @@
 	<script type="text/javascript" src="js_lib/json2.js"></script> 
 	<script type="text/javascript" src="js_lib/jquery.js"></script>
 	<script type="text/javascript" src="js_lib/jquery.cookie.js"></script>
-	<script type="text/javascript" src="student.js"></script>
 </head> 
 <body> 
 	<%@ include file="header.jsp" %>

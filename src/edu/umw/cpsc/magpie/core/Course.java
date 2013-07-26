@@ -31,7 +31,7 @@ public class Course extends AbstractItem {
             // deck with a single course) simply assume all courses have all
             // decks.
 			//ResultSet deckRs = MagpieConnection.instance().executeQuery("SELECT * FROM deck");
-			ResultSet deckRs = MagpieConnection.instance().executeQuery("SELECT * FROM deck WHERE courseid='" + getId() + "'");
+			ResultSet deckRs = MagpieConnection.instance().executeQuery("SELECT * FROM deck WHERE courseid='" + getId() + "' order by did");
 			while (deckRs.next())
 				deckIds.add(deckRs.getInt("did"));
 

@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 
 public class DeckManager extends AbstractItemManager<Deck> {
 	private DeckManager() {
-		super("deck", new IItemFactory<Deck>() {
+		super("deck", "true order by did", new IItemFactory<Deck>() {
 			public Deck create(ResultSet resultSet) {
 				return new Deck(resultSet);
 			}

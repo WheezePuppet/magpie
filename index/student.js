@@ -69,6 +69,7 @@ var handleGetCardResponse = function(ajaxCall) {
     }
 
 	$("#question .centereddisplay").html(card.question);
+    $("#question").css("background-color",card.color);
 
 	var answer = $("#answer .centereddisplay");
 	answer.text("(Click or press space to show answer)");

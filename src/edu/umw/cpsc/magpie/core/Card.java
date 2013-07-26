@@ -12,6 +12,7 @@ public class Card extends AbstractItem {
 	@Expose private String question;
 	@Expose private String answer;
 	@Expose private String dir;
+    @Expose private String color;
 
 	public Card(ResultSet resultSet) {
 		try {
@@ -116,4 +117,12 @@ public class Card extends AbstractItem {
 
 		return "(question, answer, did, inverseid, dir) VALUES ('" + question + "', '" + answer + "', '" + deckid + "', '" + inverseid + "', '" + dir + "')";
 	}
+
+    public String getColor() {
+        return color;
+    }
+
+    void setColor(String c) {
+        color = c;
+    }
 }

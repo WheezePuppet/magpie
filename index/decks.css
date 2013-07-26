@@ -1,0 +1,17 @@
+table.decks {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#decksSubmitButton {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.activeCheckbox {
+    text-align:center;
+}
+
+select:hover {
+}

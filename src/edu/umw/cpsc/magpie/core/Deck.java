@@ -10,6 +10,7 @@ public class Deck extends AbstractItem implements Comparable<Deck> {
 	private String name;
 	private boolean active;
 	private int courseid;
+	private String color;
 
 	private List<Integer> cardIds = Collections.synchronizedList(new ArrayList<Integer>());
 
@@ -19,10 +20,14 @@ public class Deck extends AbstractItem implements Comparable<Deck> {
 			name = resultSet.getString("deckname");
 			active = resultSet.getInt("active") == 1;
 			courseid = resultSet.getInt("courseid");
+			color = resultSet.getString("color");
 
 			ResultSet cardRs = MagpieConnection.instance().executeQuery("SELECT * FROM card WHERE did='" + getId() + "' order by cid");
-			while (cardRs.next())
-				cardIds.add(cardRs.getInt("cid"));
+			while (cardRs.next()) {
+                int cid = cardRs.getInt("cid");
+				cardIds.add(cid);
+                CardManager.instance().get(cid).setColor(color);
+            }
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 		}
@@ -90,5 +95,17 @@ public class Deck extends AbstractItem implements Comparable<Deck> {
             return 1;
         }
         return 0;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String c) {
+        color = c;
+	    for (int i=0; i<cardIds.size(); i++) {
+            CardManager.instance().get(cardIds.get(i)).setColor(c);
+        }
+		update("color", color);
     }
 }

@@ -70,6 +70,10 @@ public String toString() {
 		return CardManager.instance().get(cardid);
 	}
 
+    public int getCardId() {
+        return cardid;
+    }
+
 	public Date getDate() {
 		return date;
 	}

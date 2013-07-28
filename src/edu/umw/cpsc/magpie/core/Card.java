@@ -1,6 +1,7 @@
 package edu.umw.cpsc.magpie.core;
 
 import java.util.Collection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import com.google.gson.*;
 import com.google.gson.annotations.Expose;
@@ -13,6 +14,13 @@ public class Card extends AbstractItem {
 	@Expose private String answer;
 	@Expose private String dir;
     @Expose private String color;
+
+    public class Stats {
+        public int numReviews;
+        public int numSuccessfulReviews;
+        public double averageReviewTime;
+        public Date mostRecentDate;
+    }
 
 	public Card(ResultSet resultSet) {
 		try {
@@ -124,5 +132,39 @@ public class Card extends AbstractItem {
 
     void setColor(String c) {
         color = c;
+    }
+
+    private ReviewList getReviewsFor(Student s) {
+        ReviewList rl = s.getReviews();
+        ReviewList reviewsForThisCard = new ReviewList();
+        for (int i=0; i<rl.size(); i++) {
+            if (rl.get(i).getCardId() == cid) {
+                reviewsForThisCard.add(rl.get(i));
+            }
+        }
+        return reviewsForThisCard;
+    }
+
+    public Stats getStatsFor(Student s) {
+        Review lastReview = s.getLastReviewFor(this);
+        Stats stats = new Stats();
+        if (lastReview == null) {
+            return stats;
+        }
+        ReviewList rl = getReviewsFor(s);
+        int numSuccessfulReviews = 0;
+        double totalReviewTime = 0.0;
+        for (int i=0; i<rl.size(); i++) {
+            if (rl.get(i).getSuccess()) {
+                numSuccessfulReviews++;
+            }
+            totalReviewTime += rl.get(i).getResponseTime();
+        }
+        stats.numReviews = rl.size();
+        stats.numSuccessfulReviews = numSuccessfulReviews;
+        stats.averageReviewTime = totalReviewTime / stats.numReviews;
+        stats.mostRecentDate = lastReview.getDate();
+
+        return stats;
     }
 }

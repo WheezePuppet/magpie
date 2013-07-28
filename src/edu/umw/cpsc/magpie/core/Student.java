@@ -70,6 +70,10 @@ public class Student extends User implements Comparable<Student> {
 		return reviews.clone();
 	}
 
+	public ReviewList getReviews() {
+		return reviews;
+	}
+
 	public Role getRole() {
 		return Role.STUDENT;
 	}
@@ -229,7 +233,8 @@ public class Student extends User implements Comparable<Student> {
         try {
             ResultSet recentlyMissedIds = 
                 MagpieConnection.instance().executeQuery(
-                    "select cid from review where success=0 and uid='" + id + 
+                    "select distinct cid from review where " +
+                    "success=0 and uid='" + id + 
                     "' and date(reviewDatetime) >= CURDATE() - 1");
 
             while (recentlyMissedIds.next()) {

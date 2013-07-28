@@ -2,18 +2,18 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
-    width:820px;
+    width:1020px;
 }
 #cardTable table {
-    table-layout: fixed;
+/*    table-layout: fixed; */
 }
 #cardTable td.question {
     text-align: right;
-    width: 200px;
+    width: 250px;
 }
 #cardTable td.answer {
     text-align: left;
-    width: 200px;
+    width: 250px;
 }
 #cardTable td.separator {
     text-align: center;
@@ -21,13 +21,17 @@
 }
 #firstHalfTableCards {
     float:left;
-    width:410px;
+    width:510px;
 }
 #secondHalfTableCards {
     float:right;
-    width:410px;
+    width:510px;
 }
 #button {
+    margin-left:auto;
+    margin-right:auto;
+    position:relative;
+    top:100px;
     margin-top:100px;
 }
 #newCardsTitle, #recentlyMissedTitle {

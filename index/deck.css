@@ -1,0 +1,17 @@
+
+.question, .answer, .avgtime, .rate, .recentdate, .reviews {
+    cursor:pointer;
+}
+
+td.reviews, td.avgtime, td.recentdate {
+    text-align:center;
+}
+
+td.rate {
+    text-align:right;
+}
+
+#cardTable td {
+    padding-left:10px;
+    padding-right:10px;
+}

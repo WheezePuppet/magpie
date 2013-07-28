@@ -52,7 +52,7 @@
 		}
 		out.println("</ul>");
 
-        out.println("<a href=\"deck.jsp?courseid=" + course.getId() + "\">Enable or disable decks</a>");
+        //out.println("<a href=\"deck.jsp?courseid=" + course.getId() + "\">Enable or disable decks</a>");
     }
 %>
 </BODY>

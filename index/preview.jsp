@@ -19,9 +19,11 @@
 <% response.setContentType( "text/html; charset=utf-8" ); %>
 <%!
     String printCard(Card newCard) {
-        return "<tr><td class=question>" + newCard.getQuestion() +
+        String question = newCard.getQuestion().replaceAll("\n","<br/>");
+        String answer = newCard.getAnswer().replaceAll("\n","<br/>");
+        return "<tr><td class=question>" + question + 
             "</td><td class=separator>&#8212" + 
-            "</td><td class=answer>" + newCard.getAnswer() +
+            "</td><td class=answer>" + answer +
             "</td></tr>";
     }
 %>

@@ -29,7 +29,8 @@
         List<Deck> decks = course.getDecks();
         for (int j=0; j<decks.size(); j++) {
             Deck deck = decks.get(j);
-            builder.append("<TR><TD>" + deck.getName() + "</TD>" +
+            builder.append("<TR><TD><a href=\"deck.jsp?id=" + deck.getId() + 
+                "\">" + deck.getName() + "</TD>" +
                 "<TD class=activeCheckbox>" +
                 buildActiveCheckbox(course.getId(), deck.getId(), deck) +
                 "</TD><TD>" +
@@ -49,13 +50,9 @@
 %>
 <%!
     public String buildActiveCheckbox(int courseId, int deckId, Deck deck) {
-        if (deck.getActive()) {
-            return "<input class=activeCheckbox checked type=checkbox " +
-                "name=\"active_c"+courseId+"d"+deckId+"\" />";
-        } else {
-            return "<input class=activeCheckbox type=checkbox " +
-                "name=\"active_c"+courseId+"d"+deckId+"\" />";
-        }
+        String checkedString = deck.getActive() ? "checked" : "";
+        return "<input class=activeCheckbox " + checkedString + 
+            " type=checkbox name=\"active_c"+courseId+"d"+deckId+"\" />";
     }
 %>
 <%!
@@ -69,17 +66,12 @@
             "<SELECT style=\"background-color:" + color + "\" " +
             "name=\"color_c"+courseId+"d"+deckId+"\" >\n");
         for (int i=0; i<colors.length; i++) {
-            if (color.equals(colors[i])) {
-                builder.append("    <OPTION selected " +
-                    "style=\"background-color:" + colors[i] + 
-                    "\" value=\"" + colors[i] + "\">" +
-                    "" + names[i] + "</OPTION>");
-            } else {
-                builder.append("    <OPTION " +
-                    "style=\"background-color:" + colors[i] + 
-                    "\" value=\"" + colors[i] + "\">" +
-                    "" + names[i] + "</OPTION>");
-            }
+            String selectedString = 
+                color.equals(colors[i]) ? "selected" : "";
+            builder.append("    <OPTION " + selectedString + 
+                "style=\"background-color:" + colors[i] + 
+                "\" value=\"" + colors[i] + "\">" +
+                "" + names[i] + "</OPTION>");
         }
         return builder.toString();
     }

@@ -14,10 +14,12 @@ var printTableContents = function() {
         "<TH class=reviews>reviews</TH>" +
         "<TH class=rate>rate</TH>" +
         "<TH class=avgtime>avg. time</TH>" +
-        "<TH class=recentdate>most recent</TH></TR>" +
+        "<TH class=recentdate>most recent</TH>" +
+        "<TH class=nextdate>next review</TH></TR>" +
         "</THEAD><TBODY></TBODY>");
 
     $("#cardTable tbody").html("");
+    $("#cardTable tbody").css("background-color",MAGPIE.deckColor);
 
     for (var i=0; i<MAGPIE.cardStats.length; i++) {
         $("#cardTable tbody").append(
@@ -32,12 +34,14 @@ var printTableContents = function() {
                 MAGPIE.cardStats[i].averageReviewTime +
             " ms</TD><TD class=recentdate>" + 
                                      MAGPIE.cardStats[i].mostRecentDate +
+            "</TD><TD class=nextdate>" + MAGPIE.cardStats[i].nextDate +
             "</TD></TR>");
     }
 
     $(".rate").click(sortByRate);
     $(".avgtime").click(sortByTime);
     $(".recentdate").click(sortByDate);
+    $(".nextdate").click(sortByNextDate);
     $(".reviews").click(sortByNumReviews);
     $(".question").click(sortByQuestion);
     $(".answer").click(sortByAnswer);
@@ -69,6 +73,10 @@ var sortByTime = function() {
 
 var sortByDate = function() {
     sort("mostRecentDate", true);
+};
+
+var sortByNextDate = function() {
+    sort("nextDate", true);
 };
 
 var sortByNumReviews = function() {

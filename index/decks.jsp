@@ -67,7 +67,7 @@
             "name=\"color_c"+courseId+"d"+deckId+"\" >\n");
         for (int i=0; i<colors.length; i++) {
             String selectedString = 
-                color.equals(colors[i]) ? "selected" : "";
+                color.equals(colors[i]) ? "selected " : "";
             builder.append("    <OPTION " + selectedString + 
                 "style=\"background-color:" + colors[i] + 
                 "\" value=\"" + colors[i] + "\">" +

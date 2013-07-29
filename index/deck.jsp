@@ -2,6 +2,7 @@
 <%@ include file="redirectHeader.jsp" %>
 <%@ page import="edu.umw.cpsc.magpie.core.*"
          import="edu.umw.cpsc.magpie.util.*"
+         import="java.sql.Date"
          import="java.util.Collections"
          import="java.util.List" %>
 <HTML>
@@ -26,9 +27,16 @@
     out.println("<script>");
     out.println("MAGPIE = {};");
     out.println("var loadCardStats = function() {");
+    out.println("MAGPIE.deckColor = \"" + deck.getColor() + "\"");
     out.println("MAGPIE.cardStats = new Array();");
     for (int i=0; i<cards.size(); i++) {
         Card card = cards.get(i);
+        Date date = ((Student)theUser).getReviews().
+            getFor(card).getNextDate();
+        String dateString = "&#8212";
+        if (date != null) {
+            dateString = date.toString();
+        }
         String question = card.getQuestion().replaceAll("\n","<br/>");
         String answer = card.getAnswer().replaceAll("\n","<br/>");
         Card.Stats stats = card.getStatsFor((Student)theUser);
@@ -46,6 +54,7 @@
             (int) stats.averageReviewTime + ";");
         out.println("MAGPIE.cardStat.mostRecentDate = \"" + 
             stats.mostRecentDate + "\";");
+        out.println("MAGPIE.cardStat.nextDate = \"" + dateString + "\";");
         out.println("MAGPIE.cardStats.push(MAGPIE.cardStat);");
     }
     out.println("}");

@@ -1,9 +1,9 @@
 
-.question, .answer, .avgtime, .rate, .recentdate, .reviews {
+.question, .answer, .avgtime, .rate, .recentdate, .nextdate, .reviews {
     cursor:pointer;
 }
 
-td.reviews, td.avgtime, td.recentdate {
+td.reviews, td.avgtime, td.recentdate, td.nextdate {
     text-align:center;
 }
 
@@ -11,7 +11,12 @@ td.rate {
     text-align:right;
 }
 
-#cardTable td {
+#cardTable td, #cardTable th {
     padding-left:10px;
     padding-right:10px;
+    font-size:10pt;
+}
+
+#cardTable th {
+    background-color:#EEEEEE;
 }

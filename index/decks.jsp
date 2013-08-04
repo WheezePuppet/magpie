@@ -48,6 +48,9 @@
     builder.append("</FORM>");
     out.println(builder);
 %>
+<center>
+<a href=deckBuilder.jsp>Create new deck</a>
+</center>
 <%!
     public String buildActiveCheckbox(int courseId, int deckId, Deck deck) {
         String checkedString = deck.getActive() ? "checked" : "";

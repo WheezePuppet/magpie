@@ -2,9 +2,7 @@
 import java.sql.*;
 import java.io.*;
 
-/** Import a deck file to the Magpie database. This program currently does
- * <i>not</i> automatically insert the "reverse" of each card, as might be
- * desired for modern languages (where you have to translate both ways.)
+/** Import a deck file to the Magpie database.
  */
 public class Import {
 

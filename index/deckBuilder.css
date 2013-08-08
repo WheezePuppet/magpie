@@ -6,3 +6,9 @@
 #cardTable textarea {
     font-size:16pt;
 }
+
+#addNew {
+    height:30px;
+    width:30px;
+    cursor:pointer;
+}

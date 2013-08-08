@@ -37,8 +37,6 @@
 		}
 		builder.append("<TH>Grade</TH>");
 		builder.append("</TR>");
-ArrayList<Student> es = course.getEnrolledStudents();
-System.out.println("es is size " + es.size());
 		for (Student student : course.getEnrolledStudents(group))
 			builder.append(getRow(course, student));
 

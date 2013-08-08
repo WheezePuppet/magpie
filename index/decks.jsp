@@ -49,7 +49,7 @@
     out.println(builder);
 %>
 <center>
-<a href=deckBuilder.jsp>Create new deck</a>
+<a href=deckBuilder.jsp>Don't click here yet Lizzy!!</a>
 </center>
 <%!
     public String buildActiveCheckbox(int courseId, int deckId, Deck deck) {

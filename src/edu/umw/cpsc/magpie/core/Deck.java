@@ -12,7 +12,8 @@ public class Deck extends AbstractItem implements Comparable<Deck> {
 	private int courseid;
 	private String color;
 
-	private List<Integer> cardIds = Collections.synchronizedList(new ArrayList<Integer>());
+	private List<Integer> cardIds = 
+        Collections.synchronizedList(new ArrayList<Integer>());
 
 	public Deck(ResultSet resultSet) {
 		try {

@@ -33,7 +33,7 @@ public class Course extends AbstractItem {
 			//ResultSet deckRs = MagpieConnection.instance().executeQuery("SELECT * FROM deck");
 			ResultSet deckRs = MagpieConnection.instance().executeQuery("SELECT * FROM deck WHERE courseid='" + getId() + "' order by did");
 			while (deckRs.next())
-				deckIds.add(deckRs.getInt("did"));
+                addDeckById(deckRs.getInt("did"));
 
 			ResultSet userRs = MagpieConnection.instance().executeQuery("SELECT * FROM courseLink WHERE courseid='" + getId() + "'");
 			while (userRs.next())
@@ -42,6 +42,10 @@ public class Course extends AbstractItem {
 			e.printStackTrace(System.err);
 		}
 	}
+
+    public void addDeckById(int deckId) {
+        deckIds.add(deckId);
+    }
 
 	public Course(String name, Date startDate) {
 		this.name = name;

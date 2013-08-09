@@ -31,10 +31,10 @@ New deck name: <input id=deckName type=text size=50 name=name />
 <tr><th>"Question"</th><th>"Answer"</th><th></th></tr>
 
 <tr><td>
-    <textarea cols=40 rows=3 name=q1></textarea>
+    <textarea class=questionbox cols=40 rows=3 name=q1></textarea>
     </td>
     <td>
-    <textarea cols=40 rows=3 name=a1></textarea>
+    <textarea class=answerbox cols=40 rows=3 name=a1></textarea>
     </td>
     <td class=widget >
     <img id=addNew src="images/plus.png" />

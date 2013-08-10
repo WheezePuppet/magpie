@@ -71,11 +71,13 @@ var handleGetCardResponse = function(ajaxCall) {
 	$("#question .centereddisplay").html(card.question);
     $("#question").css("background-color",card.color);
 
+/*
 	var answer = $("#answer .centereddisplay");
 	answer.text("(Click or press space to show answer)");
 	answer.removeClass("visibleAnswer");
 	answer.addClass("hiddenAnswer");
     answer.click(handleAnswerClick);
+*/
 
 	$("#prompt").removeClass("visible");
 	$("#prompt").addClass("hidden");
@@ -106,10 +108,12 @@ var handleAnswerClick = function() {
 
 	hidden = false;
 	
+/*
 	var answer = $("#answer .centereddisplay");
 	answer.removeClass("hiddenAnswer");
 	answer.addClass("visibleAnswer");
 	answer.html(card.answer);
+*/
 
 	showTime = new Date().getTime();
 

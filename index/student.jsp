@@ -20,9 +20,11 @@
 			<div id=question class=display > 
 				<div class=centereddisplay></div> 
 			</div> 
+<!--
 			<div id=answer class=display >
 				<div class=centereddisplay></div> 
 			</div> 
+-->
 			<div>
 				<div id=response></div>
 			</div> 

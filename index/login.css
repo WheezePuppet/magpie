@@ -3,6 +3,7 @@
 	margin-right:auto;
 	display:table;
 	text-align:center;
+    letter-spacing: -5px;
 }
 
 #msg, #logincontrols {

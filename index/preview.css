@@ -1,38 +1,41 @@
 #cardTable {
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10px;
-    width:1020px;
+    padding-bottom: 10px;
+	margin-bottom: 10px;
+    width:60%;
 }
 #cardTable table {
-/*    table-layout: fixed; */
+	/*margin-bottom: 50px;*/
 }
 #cardTable td.question {
     text-align: right;
-    width: 250px;
+    width: 25%;
 }
 #cardTable td.answer {
     text-align: left;
-    width: 250px;
+    width: 25%;
 }
 #cardTable td.separator {
     text-align: center;
-    width: 10px;
+    width: .2%;
 }
-#firstHalfTableCards {
-    float:left;
-    width:510px;
+#firstHalfTableCards, #secondHalfTableCards {
+	float: left;
+    width:50%;
 }
+#clear {
+	clear: both;
+}
+/*
 #secondHalfTableCards {
     float:right;
-    width:510px;
+    width:50%;
 }
+*/
 #button {
     margin-left:auto;
     margin-right:auto;
-    position:relative;
-    top:100px;
-    margin-top:100px;
 }
 #newCardsTitle, #recentlyMissedTitle {
     font-size:20pt;
@@ -42,6 +45,5 @@
     margin-top:50px;
 }
 #recentlyMissedCardsDiv {
-    position:relative;
-    top:40px;
+	margin-bottom: 50px;
 }

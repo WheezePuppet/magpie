@@ -1,6 +1,7 @@
 <html> 
 <head> 
 	<link rel="stylesheet" type="text/css" href="login.css" />
+	<link rel="stylesheet" type="text/css" href="title.css" />
 	<script type="text/javascript" src="js_lib/jquery.js" ></script>
 	<script type="text/javascript">
 		$(document).ready(function() {

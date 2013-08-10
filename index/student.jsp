@@ -5,6 +5,7 @@
 	<title>Magpie</title> 
 	<link rel="stylesheet" type="text/css" href="header.css" />
 	<link rel="stylesheet" type="text/css" href="student.css" />
+	<link rel="stylesheet" type="text/css" href="title.css" />
 	<script type="text/javascript" src="js_lib/json2.js"></script> 
 	<script type="text/javascript" src="js_lib/jquery.js"></script>
 	<script type="text/javascript" src="js_lib/jquery.cookie.js"></script>
@@ -31,6 +32,6 @@
 		</div> 
 	</div> 
 	<%@ include file="header.jsp" %>
-	<div id="ad">This application is brought to you by the UMW Computer Science department</div> 
+	<%@ include file="ad.jsp" %>
 </body> 
 </html> 

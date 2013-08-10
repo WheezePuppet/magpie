@@ -24,7 +24,7 @@
 	float: left;
     width:50%;
 }
-#clear {
+.clear {
 	clear: both;
 }
 /*
@@ -39,10 +39,10 @@
 }
 #newCardsTitle, #recentlyMissedTitle {
     font-size:20pt;
-    margin-top:50px;
+    padding-bottom:10px;
 }
 #newCardsDiv, #recentlyMissedCardsDiv {
-    margin-top:50px;
+    margin-top:10px;
 }
 #recentlyMissedCardsDiv {
 	margin-bottom: 50px;

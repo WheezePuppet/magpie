@@ -49,7 +49,7 @@
         }
 
         if (cards.size() % 2 == 1) {
-            html += "<tr><td></td><td>.</td><td></td></tr>";
+            html += "<tr><td></td><td style=\"visibility:hidden\">.</td><td></td></tr>";
         }
 
         html += "</table>";
@@ -99,7 +99,7 @@
 %>
 	</div> 
 
-
+    <div class="clear"></div>
     <div id=button>
         <form method=get action=student.jsp >
             <input type=submit value="Okay!" />

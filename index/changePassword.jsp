@@ -11,7 +11,9 @@
 	</div> 
 	<div id=name>Change password</div>
 	<div id=greeting>
-		Welcome to Magpie! Please change your password to something you'll remember. (If you ever forget your password, you'll need to send mail to stephen@umw.edu to get it reset.)
+		Welcome to Magpie! Please change your password to something you'll
+remember. (If you ever forget your password, you'll need to send mail to
+stephen AT umw DOT edu to get it reset.)
 	</div>
 	<br/><br/>
 	<form action="processChangePassword.jsp" onsubmit="return validateForm(this)" method="POST">

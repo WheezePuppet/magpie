@@ -110,7 +110,7 @@
 	each day. (If you receive the "done" message indicating that you ran
 	out of cards, he or she will see that, too.)</p>
 	<p>If you run into any difficulties, or have questions about using
-	Magpie, don't hesitate to send email to stephen@umw.edu.</p>
+	Magpie, don't hesitate to send email to stephen AT umw DOT edu.</p>
 
 	<p>That's it! Good luck, and have fun using Magpie!</p>
 </body>

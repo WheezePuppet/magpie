@@ -1,9 +1,0 @@
-
-Lizzy:
-Be able to change card color.
-Line graph of progress.
-
-Daddy:
-which words were hardest (you missed the most often)
-which words took you the longest to answer
-be able to enable/disable certain decks

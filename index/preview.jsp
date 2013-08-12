@@ -80,7 +80,7 @@
     }
 
     if (newCards.size() > 0  &&  recentlyMissedCards.size() > 0) {
-        out.println("<div class="clear"><hr/></div>");
+        out.println("<div class=\"clear\"></div>");
     }
 
     if (recentlyMissedCards.size() > 0) {
